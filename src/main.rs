@@ -49,7 +49,7 @@ fn process_tar<R: io::Read>(stream: R) -> io::Result<()> {
             match b {
                 b'\n' => print!("\\n"),
                 b'\\' => print!("\\\\"),
-                _     => print!("{}", *b as char)
+                _     => io::stdout().write_all(&[*b])?
             }
         }
         println!();
